@@ -2,5 +2,5 @@
   var destPath = fp.blockOpts.dest || "";
   destPath = destPath.replace(/\/+$/,"");
 }}# Add run script as {{= destPath }}/run-java.sh and make it executable
-COPY run-java.sh debug-options java-container-options {{= destPath }}/
-RUN chmod 755 {{= destPath }}/run-java.sh {{= destPath }}/java-container-options {{= destPath }}/debug-options
+COPY run-java.sh debug-options java-container-options libjvm-cpu-limit.so {{= destPath }}/
+RUN chmod 755 {{= destPath }}/run-java.sh {{= destPath }}/java-container-options {{= destPath }}/debug-options {{= destPath }}/libjvm-cpu-limit.so

@@ -106,12 +106,14 @@ load_env() {
     source "${script_dir}/${run_env_sh}"
   fi
 
-  if [ -z "${MAX_CORES}" ]; then
-    MAX_CORES="$(max_cores)"
+  if [ -z "${JAVA_MAX_CORES_AVAILABLE}" ]; then
+    JAVA_MAX_CORES_AVAILABLE="$(max_cores)"
   fi
-  if [ "${MAX_CORES}" != "" ]; then
-    export MAX_CORES
+  if [ "${JAVA_MAX_CORES_AVAILABLE}" != "" ]; then
+    LD_PRELOAD="$(get_script_dir)/libjvm-cpu-limit.so"
+    export JAVA_MAX_CORES_AVAILABLE LD_PRELOAD
   fi
+
 
   # Check also $JAVA_APP_DIR. Overrides other defaults
   # It's valid to set the app dir in the default script
